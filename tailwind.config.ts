@@ -7,6 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      borderColor: "#929292",
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -18,3 +21,6 @@ const config: Config = {
   plugins: [],
 };
 export default config;
+
+// npm install -D tailwindcss postcss autoprefixer concurrently
+// npm install -D prettier prettier-plugin-tailwindcss

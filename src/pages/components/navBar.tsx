@@ -3,7 +3,7 @@ import { JSX, SVGProps } from "react";
 
 const NavBar = () => {
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white">
+    <div className="z-10 fixed top-0 left-0 right-0 bg-white">
       <nav className="flex justify-between items-center px-5 border-b-2 border-borderColor h-16">
         <Link href="/">
           <LeafIcon />

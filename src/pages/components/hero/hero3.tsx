@@ -53,21 +53,21 @@ export default function Hero3(
         transform="translate(-157 -122.59945)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M849.30446,150.88493a27.0413,27.0413,0,0,0-23.30892,16.29742c-5.82841,14.08871,1.67611,30.638,12.94175,40.91164s25.73705,16.146,38.88553,23.86474c17.66061,10.3676,33.5301,24.75955,42.3667,43.23382s9.77645,41.35853-.61057,59.00772c-9.64092,16.38147-27.17132,26.18572-43.89076,35.22786"
         transform="translate(-157 -122.59945)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M1004.05062,170.64a27.04127,27.04127,0,0,0-28.40774-1.38242c-13.23342,7.57224-17.43052,25.25222-14.81179,40.27235s10.46668,28.52256,16.13823,42.67515c7.61783,19.00927,11.35579,40.10422,7.03358,60.12177s-17.58823,38.688-36.60588,46.28493c-17.65163,7.05125-37.51521,4.072-56.271.98658"
         transform="translate(-157 -122.59945)"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="710.6826"
@@ -83,7 +83,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="771.8672"
@@ -99,7 +99,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="781.28021"
@@ -115,7 +115,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="775.39708"
@@ -131,7 +131,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="704.79947"
@@ -147,7 +147,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="736.56839"
@@ -163,7 +163,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="805.98938"
@@ -179,7 +179,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="857.76096"
@@ -195,7 +195,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="675.3838"
@@ -211,7 +211,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="693.0332"
@@ -227,7 +227,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="856.58433"
@@ -243,7 +243,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="596.5498"
@@ -259,7 +259,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="694.20983"
@@ -275,7 +275,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="822.46215"
@@ -291,7 +291,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="754.2178"
@@ -307,7 +307,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="758.9243"
@@ -323,7 +323,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="637.73174"
@@ -339,7 +339,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <ellipse
         cx="654.20452"
@@ -355,7 +355,7 @@ export default function Hero3(
         ry="13.71611"
         fill="none"
         stroke="#3f3d56"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <g opacity="0.3">
         <ellipse
@@ -374,7 +374,7 @@ export default function Hero3(
           transform="translate(-84.11655 778.515) rotate(-60.79941)"
           fill="none"
           stroke="#3f3d56"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         />
       </g>
       <g opacity="0.3">
@@ -394,7 +394,7 @@ export default function Hero3(
           transform="translate(-148.99179 720.84216) rotate(-48.17218)"
           fill="none"
           stroke="#3f3d56"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         />
       </g>
       <g opacity="0.3">
@@ -414,7 +414,7 @@ export default function Hero3(
           transform="translate(-137.65292 597.95208) rotate(-48.17218)"
           fill="none"
           stroke="#3f3d56"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         />
       </g>
     </svg>

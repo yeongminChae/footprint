@@ -13,34 +13,34 @@ import Hero3 from "../components/hero/hero3";
 import cls from "@/libs/utils";
 
 import Button from "../components/ui/button";
+import { HeroContent } from "../components/hero/heroContent";
 
 interface IContentHeroProps {
   scrollYProgressProps: MotionValue<number>;
-  // hero: JSX.Element;
-  // title?: string;
-  // description: string;
-  // className?: string;
+  scrollYProps: MotionValue<number>;
 }
 
 const HeroPage: NextPage = () => {
-  const { scrollYProgress } = useScroll({});
+  const { scrollYProgress, scrollY } = useScroll({});
 
   return (
-    <div className="w-full bg-bgColor ">
+    <div className="w-full bg-bgColor bg-centers">
       <div className="h-36" />
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-[30rem]">
         <HeroContentHero1
           scrollYProgressProps={scrollYProgress}
-          // hero={<Hero1 />}
-          // title={"우리의 일상이 만들어낸 그림자, 탄소 발자국"}
-          // description={
-          //   "우리가 매일 사용하는 에너지와 자원은 지구에 영향을 미칩니다."
-          // }
+          scrollYProps={scrollY}
         />
-        <HeroContentHero2 scrollYProgressProps={scrollYProgress} />
-        <HeroContentHero3 scrollYProgressProps={scrollYProgress} />
+        <HeroContentHero2
+          scrollYProgressProps={scrollYProgress}
+          scrollYProps={scrollY}
+        />
+        <HeroContentHero3
+          scrollYProgressProps={scrollYProgress}
+          scrollYProps={scrollY}
+        />
 
-        <div className="h-[100vh]" />
+        <div className="h-[50vh]" />
       </div>
     </div>
   );
@@ -50,26 +50,20 @@ export default HeroPage;
 
 const HeroContentHero1 = ({
   scrollYProgressProps,
-  // hero,
-  // title,
-  // description,
+  scrollYProps,
 }: IContentHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({});
+
   const [sticky, setSticky] = useState({ isSticky: true, top: 0 });
 
   useMotionValueEvent(scrollYProgressProps, "change", (progress) => {
-    const percent = 0.14;
+    const percent = 0.15;
+    console.log(`first progress: ${progress}`);
+    console.log(`first scrollYProps.get(): ${scrollYProps.get()}`);
     if (progress >= percent && sticky.isSticky) {
-      setSticky({
-        isSticky: false,
-        top: scrollY.get(),
-      });
+      setSticky({ isSticky: false, top: 450 });
     } else if (progress < percent && !sticky.isSticky) {
-      setSticky({
-        isSticky: true,
-        top: scrollY.get() * percent,
-      });
+      setSticky({ isSticky: true, top: 450 });
     }
   });
 
@@ -78,22 +72,19 @@ const HeroContentHero1 = ({
       ref={ref}
       className={cls(
         sticky.isSticky ? "sticky top-36" : "relative",
-        "grid grid-rows-4 max-h-[125vh] justify-center border-2 border-red-400"
+        "flex flex-col items-center justify-center gap-20"
       )}
       style={{ top: sticky.isSticky ? "" : `${sticky.top}px` }}
     >
       <motion.div className="">
         <Hero1 />
       </motion.div>
-      {/* <motion.div className="">{hero}</motion.div> */}
 
-      <motion.div className="flex flex-col items-center justify-center gap-5 pt-64 ">
+      <motion.div className="flex flex-col items-center justify-center gap-5 ">
         <span className="text-4xl font-bold tracking-wider">
-          {/* {title} */}
           {"우리의 일상이 만들어낸 그림자, 탄소 발자국"}
         </span>
         <span className="text-xl font-bold opacity-60">
-          {/* {description} */}
           {"우리가 매일 사용하는 에너지와 자원은 지구에 영향을 미칩니다."}
         </span>
       </motion.div>
@@ -101,32 +92,30 @@ const HeroContentHero1 = ({
   );
 };
 
-const HeroContentHero2 = ({ scrollYProgressProps }: IContentHeroProps) => {
+const HeroContentHero2 = ({
+  scrollYProgressProps,
+  scrollYProps,
+}: IContentHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({});
+
   const [sticky, setSticky] = useState({ isSticky: true, top: 0 });
 
   useMotionValueEvent(scrollYProgressProps, "change", (progress) => {
-    const percent = 0.4;
+    const percent = 0.52;
+    console.log(`sec progress: ${progress}`);
+    console.log(`sec scrollYProps.get(): ${scrollYProps.get()}`);
     if (progress >= percent && sticky.isSticky) {
-      setSticky({
-        isSticky: false,
-        top: (scrollY.get() * percent) / 2.55,
-      });
+      setSticky({ isSticky: false, top: 450 });
     } else if (progress < percent && !sticky.isSticky) {
-      setSticky({
-        isSticky: true,
-        top: (scrollY.get() * percent) / 2.55,
-      });
+      setSticky({ isSticky: true, top: 450 });
     }
   });
-
   return (
     <motion.div
       ref={ref}
       className={cls(
         sticky.isSticky ? "sticky top-36" : "relative",
-        "grid grid-rows-4 max-h-[125vh] justify-center border-2 border-red-400"
+        "flex flex-col items-center justify-center gap-20"
       )}
       style={{ top: sticky.isSticky ? "" : `${sticky.top}px` }}
     >
@@ -134,7 +123,7 @@ const HeroContentHero2 = ({ scrollYProgressProps }: IContentHeroProps) => {
         <Hero2 />
       </motion.div>
 
-      <motion.div className="flex flex-col items-center justify-center gap-5 pt-64 ">
+      <motion.div className="flex flex-col items-center justify-center gap-5">
         <span className="text-4xl font-bold tracking-wider">
           {"작은 발자국이 모여 큰 위기를 만듭니다."}
         </span>
@@ -146,40 +135,33 @@ const HeroContentHero2 = ({ scrollYProgressProps }: IContentHeroProps) => {
   );
 };
 
-const HeroContentHero3 = ({ scrollYProgressProps }: IContentHeroProps) => {
+const HeroContentHero3 = ({
+  scrollYProgressProps,
+  scrollYProps,
+}: IContentHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({});
+
   const [sticky, setSticky] = useState({ isSticky: true, top: 0 });
 
   useMotionValueEvent(scrollYProgressProps, "change", (progress) => {
-    const percent = 0.9;
-    console.log(progress);
-    console.log(scrollY.get());
-    if (progress >= percent && sticky.isSticky) {
-      setSticky({
-        isSticky: false,
-        top: scrollY.get() * 0.325,
-      });
-    } else if (progress < percent && !sticky.isSticky) {
-      setSticky({
-        isSticky: true,
-        top: scrollY.get() * 0.325,
-      });
-    }
+    console.log(`third progress: ${progress}`);
+    console.log(`third scrollYProps.get(): ${scrollYProps.get()}`);
   });
 
   return (
     <motion.div
       ref={ref}
       className={cls(
-        "grid h-[100vh] grid-rows-4 border-2 border-red-400 sticky top-36"
+        sticky.isSticky ? "sticky top-36" : "relative",
+        "flex flex-col items-center justify-center gap-20"
       )}
+      style={{ top: sticky.isSticky ? "" : `${sticky.top}px` }}
     >
-      <motion.div className="">
+      <motion.div className="self-start">
         <Hero3 />
       </motion.div>
 
-      <motion.div className="self-center flex flex-col items-center justify-center gap-5 pt-64 ">
+      <motion.div className="flex flex-col items-center justify-center gap-5 mt-[-12.5rem]">
         <span className="text-xl font-bold opacity-60">
           {"당신의 작은 실천이 큰 변화를 만들 수 있습니다."}
         </span>

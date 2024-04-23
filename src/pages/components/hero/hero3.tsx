@@ -10,7 +10,7 @@ export default function Hero3(
       xmlnsXlink="http://www.w3.org/1999/xlink"
       data-name="Layer 1"
       viewBox="0 0 886 654.3011"
-      className="w-[52rem] h-[40rem]"
+      className="w-[45rem] h-[35rem]"
     >
       <title>environment1</title>
       <path

@@ -1,5 +1,6 @@
-import cls from "@/libs/utils";
 import { useRouter } from "next/router";
+
+import cls from "@/libs/utils";
 
 interface ButtonProps {
   btnTitle: string;

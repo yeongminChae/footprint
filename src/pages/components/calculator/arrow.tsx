@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
   const [isHover, setIsHover] = useState(false);
   const divStyle =
-    "flex cursor-pointer items-center justify-center px-6 py-4 rounded-lg shadow-md border border-btnColor border-opacity-45 hover:border-none";
+    "flex cursor-pointer items-center justify-center px-6 py-4 rounded-lg shadow-md border border-btnColor border-opacity-45 hover:border-transparent";
 
   return (
     <AnimatePresence>

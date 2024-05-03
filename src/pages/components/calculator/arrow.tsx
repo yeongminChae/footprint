@@ -2,10 +2,14 @@ import { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
+import cls from "@/libs/utils";
+
+const Arrow = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
   const [isHover, setIsHover] = useState(false);
-  const divStyle =
-    "flex cursor-pointer items-center justify-center px-6 py-4 rounded-lg shadow-md border border-btnColor border-opacity-45 hover:border-transparent";
+  const divStyle = cls(
+    sharedbtnStyle,
+    "cursor-pointer border border-btnColor border-opacity-45 hover:border-transparent"
+  );
 
   return (
     <AnimatePresence>
@@ -16,6 +20,9 @@ const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
         }}
         onHoverStart={() => setIsHover(true)}
         onHoverEnd={() => setIsHover(false)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         className={divStyle}
       >
         {isHover ? (
@@ -23,7 +30,7 @@ const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
             key="hover"
             initial={{ y: -15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "tween", delay: 0.25, duration: 0.1 }}
+            transition={{ type: "tween", delay: 0.1, duration: 0.1 }}
             className="text-bgColor"
           >
             {left ? "Prev" : "Next"}
@@ -35,7 +42,7 @@ const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
             exit={{ x: -50, opacity: 0, transition: { duration: 0.3 } }}
             transition={{ type: "tween" }}
           >
-            <ArrorSvg left={left} />
+            <ArrowSvg left={left} />
           </motion.span>
         )}
       </motion.div>
@@ -43,9 +50,28 @@ const Arror = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
   );
 };
 
-export default Arror;
+export default Arrow;
 
-const ArrorSvg = ({ left }: { left: boolean }) => {
+export const DisabledBtn = ({ text }: { text: string }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0.5 }}
+      transition={{ duration: 0.5 }}
+      className={cls(
+        sharedbtnStyle,
+        "border cursor-not-allowed bg-borderColor"
+      )}
+    >
+      {text}
+    </motion.div>
+  );
+};
+
+const sharedbtnStyle =
+  "flex items-center justify-center w-20 py-4 rounded-lg shadow-md";
+
+const ArrowSvg = ({ left }: { left: boolean }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

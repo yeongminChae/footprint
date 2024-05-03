@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import cls from "@/libs/utils";
 import Arrow, { DisabledBtn } from "../components/calculator/arrow";
-import CalculatorForm, {
-  formConfigs,
-} from "../components/calculator/calculator";
+import CalculatorForm from "../components/calculator/calculator";
+import { formConfigs } from "../components/calculator/formConfigs";
+import { LeafIcon } from "../components/navBar";
 
 const Calculator = () => {
   const [numAndIsPrev, setNumAndIsPrev] = useState({
@@ -40,8 +40,11 @@ const Calculator = () => {
       <DivStacks />
 
       <AnimatePresence custom={numAndIsPrev.isPrev}>
-        {formConfigs.map((config, idx) => {
-          return numAndIsPrev.number === idx + 1 ? (
+        {formConfigs.map((config, idx) =>
+          numAndIsPrev.number === idx + 1 ? (
+            // 맵(map) 함수나 반복문 내에서 JSX 반환 식에서
+            // ()를 사용하면 return을 명시해 주지 않아도 되고,
+            // {}를 사용하면 return을 명시해 주어야 한다.
             <motion.div
               key={config.keyword}
               variants={slider}
@@ -60,8 +63,8 @@ const Calculator = () => {
                 key={config.keyword}
               />
             </motion.div>
-          ) : null;
-        })}
+          ) : null
+        )}
       </AnimatePresence>
 
       {numAndIsPrev.number === max ? (
@@ -91,7 +94,11 @@ const DivStacks = () => {
           "opacity-90 w-[46rem] translate-y-[1.35rem]",
           stackStyle
         )}
-      />
+      >
+        <div className="w-full h-full flex items-center justify-center">
+          <LeafIcon style={{ width: "5rem", height: "5rem" }} strokeWidth="2" />
+        </div>
+      </div>
     </>
   );
 };

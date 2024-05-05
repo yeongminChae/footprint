@@ -52,7 +52,7 @@ const Arrow = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
 
 export default Arrow;
 
-export const DisabledBtn = ({ text }: { text: string }) => {
+export const DisabledArrow = ({ text }: { text: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -4,16 +4,18 @@ import cls from "@/libs/utils";
 
 interface ButtonProps {
   btnTitle: string;
-  moveUrl: string;
   isActivate?: boolean;
   size?: "big" | "small";
+  moveUrl?: string | undefined;
+  onClick?: () => void;
 }
 
 const Button = ({
   btnTitle,
-  moveUrl,
   isActivate = true,
   size = "big",
+  moveUrl,
+  onClick,
 }: ButtonProps) => {
   const router = useRouter();
 
@@ -23,7 +25,11 @@ const Button = ({
   );
 
   const onBtnClick = () => {
-    router.push(moveUrl);
+    if (onClick) {
+      onClick();
+    } else if (moveUrl) {
+      router.push(moveUrl);
+    }
   };
 
   return (

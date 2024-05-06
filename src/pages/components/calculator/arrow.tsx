@@ -6,10 +6,6 @@ import cls from "@/libs/utils";
 
 const Arrow = ({ left, onClick }: { left: boolean; onClick: () => void }) => {
   const [isHover, setIsHover] = useState(false);
-  const divStyle = cls(
-    sharedbtnStyle,
-    "cursor-pointer border border-btnColor border-opacity-45 hover:border-transparent"
-  );
 
   return (
     <AnimatePresence>
@@ -56,20 +52,25 @@ export const DisabledArrow = ({ text }: { text: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      animate={{ opacity: 0.5 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cls(
         sharedbtnStyle,
-        "border cursor-not-allowed bg-borderColor"
+        "border cursor-not-allowed bg-unActiveBtnColor"
       )}
     >
-      {text}
+      <span className="text-black text-opacity-50">{text}</span>
     </motion.div>
   );
 };
 
 const sharedbtnStyle =
   "flex items-center justify-center w-20 py-4 rounded-lg shadow-md";
+
+const divStyle = cls(
+  sharedbtnStyle,
+  "cursor-pointer border border-btnColor border-opacity-45 hover:border-transparent"
+);
 
 const ArrowSvg = ({ left }: { left: boolean }) => {
   return (

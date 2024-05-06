@@ -20,7 +20,7 @@ const Button = ({
   const router = useRouter();
 
   const btnStyling = cls(
-    "transition-all ease-in duration-200 flex items-center justify-center shadow-custom-shadow rounded-lg ",
+    constBtnStyle,
     size === "big" ? "w-[28rem] h-16" : "w-36 h-12"
   );
 
@@ -37,15 +37,12 @@ const Button = ({
       onClick={onBtnClick}
       className={cls(
         btnStyling,
-        isActivate
-          ? "bg-btnColor hover:bg-hoverColor cursor-pointer"
-          : "bg-unActiveBtnColor"
+        isActivate ? activeBtnStyle : unActiveBtnStyle
       )}
     >
       <span
         className={cls(
-          "text-white font-bold",
-          size === "big" ? " text-xl" : "text-base"
+          size === "big" ? " text-xl font-bold" : "text-base font-semibold"
         )}
       >
         {btnTitle}
@@ -53,5 +50,14 @@ const Button = ({
     </div>
   );
 };
+
+const constBtnStyle =
+  "transition-all ease-in duration-200 flex items-center justify-center rounded-lg ";
+
+const activeBtnStyle =
+  "bg-btnColor hover:bg-hoverColor cursor-pointer shadow-custom-shadow text-white";
+
+const unActiveBtnStyle =
+  "bg-unActiveBtnColor cursor-not-allowed shadow-lg text-black text-opacity-50";
 
 export default Button;

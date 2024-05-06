@@ -1,3 +1,26 @@
+export interface iFormConfig {
+  id: number;
+  title: string;
+  inputTitle: string;
+  units: string;
+  keyword: string;
+  calcNum: number | number[][];
+  key: string;
+  types?: string[];
+}
+
+const transportTypes = {
+  휘발유: [16.04, 2.097],
+  경유: [15.35, 2.582],
+  LPG: [11.06, 1.868],
+  "승용차 없음": [0],
+};
+
+const garbageTypes = {
+  kg: [1, 0.5573],
+  L: [1, 0.095],
+};
+
 export const formConfigs = [
   {
     id: 0,
@@ -28,8 +51,8 @@ export const formConfigs = [
     title: "교통 CO₂ 발생량",
     inputTitle: "교통 사용량",
     units: "km",
-    types: ["휘발유", "경유", "LPG", "승용차 없음"],
-    calcNum: 2.097,
+    types: Object.keys(transportTypes),
+    calcNum: Object.values(transportTypes),
     keyword: "교통",
   },
   {
@@ -37,8 +60,8 @@ export const formConfigs = [
     title: "생활 폐기물 CO₂ 발생량",
     inputTitle: "폐기물 배출량",
     units: "kg",
-    types: ["kg", "L"],
-    calcNum: 0.5573,
+    types: Object.keys(garbageTypes),
+    calcNum: Object.values(garbageTypes),
     keyword: "폐기물",
   },
 ];

@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 import cls from "@/libs/utils";
 import Button from "../ui/button";
+import { iFormConfig } from "./formConfigs";
 
-interface iCalculaotrFormProps {
-  id: number;
-  title: string;
-  inputTitle: string;
-  units: string;
-  keyword: string;
-  types?: string[];
-  calcNum: number;
-  key: string;
+interface iCalculaotrFormProps extends iFormConfig {
+  isFormValid: (isValid: boolean) => void;
 }
 
 const CalculatorForm = ({
@@ -25,19 +19,52 @@ const CalculatorForm = ({
   types,
   calcNum,
   keyword,
+  isFormValid,
 }: iCalculaotrFormProps) => {
-  const { register, handleSubmit, watch } = useForm({ mode: "onSubmit" });
+  const ref = useRef(null);
   const [co2, setCo2] = useState("");
   const [type, setType] = useState(types ? types[0] : "");
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { isValid },
+  } = useForm({
+    mode: "onChange",
+  });
+
+  const isInView = useInView(ref, { once: true });
   const usage = watch("usage");
 
   useEffect(() => {
-    const temp = Number(usage) * calcNum;
-    const calculatedCo2 = isNaN(temp) ? (0.0).toFixed(1) : temp.toFixed(1);
+    isFormValid(isValid);
+  }, [isFormValid, isValid]);
 
+  useEffect(() => {
+    calcFunc();
+  }, [usage, calcNum, setCo2]);
+
+  const calcFunc = () => {
+    let temp = 0;
+    if (typeof calcNum === "number") {
+      temp = Number(usage) * calcNum;
+    } else if (typeof calcNum !== "number" && types) {
+      const calcArr = calcNum[types?.indexOf(type)];
+      const divided = calcArr[0];
+      const multiple = calcArr[1];
+      temp = (Number(usage) / divided) * multiple;
+    }
+
+    const calculatedCo2 = isNaN(temp) ? (0.0).toFixed(1) : temp.toFixed(1);
     setCo2(calculatedCo2);
-  }, [usage, calcNum]);
+  };
+
+  const setTypeFunc = (type: string) => {
+    setType(type);
+    reset();
+  };
 
   const onSubmit = () => {
     console.log("keyword");
@@ -63,22 +90,31 @@ const CalculatorForm = ({
             <div className="flex-grow flex items-center gap-20 mx-auto">
               {types?.map((i) => (
                 <div
-                  onClick={() => setType(i)}
+                  key={i}
+                  onClick={() => setTypeFunc(i)}
                   className="flex gap-3 cursor-pointer items-center "
                 >
-                  <div
-                    className={cls(
-                      type === i ? "opacity-80 bg-btnColor" : "",
-                      "h-5 w-5 border-2 border-btnColor rounded-sm"
-                    )}
+                  <motion.div
+                    initial={{
+                      backgroundColor: "rgb(255, 255, 255)",
+                      opacity: 0,
+                    }}
+                    animate={{
+                      backgroundColor:
+                        type === i ? "rgb(0 139 139)" : "rgb(255, 255, 255)",
+                      opacity: type === i ? 0.8 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="h-5 w-5 border-2 border-btnColor rounded-sm"
                   />
-                  <span
-                    className={cls(
-                      type === i ? "opacity-100 font-semibold" : "opacity-45"
-                    )}
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: type != i ? 0.45 : 1 }}
+                    transition={{ duration: 0.5 }}
+                    className={cls(type === i ? "font-semibold" : "")}
                   >
                     {i}
-                  </span>
+                  </motion.span>
                 </div>
               ))}
             </div>
@@ -99,7 +135,9 @@ const CalculatorForm = ({
             placeholder="사용량을 입력해주세요..."
             required
           />
-          <span className="text-xs w-12 font-medium">{units} / 월</span>
+          <span className="text-xs w-12 font-medium">
+            {id === 4 ? type : units} / 월
+          </span>
         </div>
 
         <div className={cls(flexCenter, "w-full gap-4")}>
@@ -111,15 +149,22 @@ const CalculatorForm = ({
         </div>
 
         <div className="w-full grid grid-cols-3 justify-center">
-          {id === 4 ? (
-            <div className={cls(flexCenter_Justify, "col-start-2 col-span-1")}>
-              <Button
-                btnTitle={"제출"}
-                onClick={handleSubmit(onSubmit)}
-                size="small"
-              />
-            </div>
-          ) : null}
+          <motion.div
+            ref={ref}
+            key="button"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isInView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            className={cls(flexCenter_Justify, "col-start-2 col-span-1")}
+            style={{ display: id === 4 ? "" : "none" }}
+          >
+            <Button
+              btnTitle={"제출"}
+              onClick={handleSubmit(onSubmit)}
+              isActivate={usage === "" ? false : true}
+              size="small"
+            />
+          </motion.div>
 
           <div
             className={cls(

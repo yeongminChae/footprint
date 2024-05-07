@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
+import { useRecoilState } from "recoil";
 
 import cls from "@/libs/utils";
+import { co2Atom } from "@/libs/atoms";
 import { flexCenter, sharedStyles } from "../calculator";
 
 interface iCalculatorFormResults {
@@ -16,7 +19,7 @@ const CalculatorFormResults = ({
   type,
   types,
 }: iCalculatorFormResults) => {
-  const [co2, setCo2] = useState("");
+  const [co2, setCo2] = useRecoilState(co2Atom);
 
   const calcFunc = () => {
     let temp = 0;

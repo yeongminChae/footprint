@@ -1,12 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+
+import { RecoilRoot } from "recoil";
+
 import NavBar from "./components/navBar";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <NavBar />
-      <Component {...pageProps} />
+      <RecoilRoot>
+        <NavBar />
+        <Component {...pageProps} />
+      </RecoilRoot>
     </>
   );
 }

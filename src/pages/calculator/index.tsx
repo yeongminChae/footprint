@@ -1,12 +1,14 @@
-import { isValidElement, useEffect, useState } from "react";
+import { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import cls from "@/libs/utils";
 import Arrow, { DisabledArrow } from "../components/calculator/arrow";
 import CalculatorForm from "../components/calculator/calculator";
 import { formConfigs } from "../components/calculator/formConfigs";
 import { LeafIcon } from "../components/navBar";
+import { co2Atom, co2DataAtom } from "@/libs/atoms";
 
 const Calculator = () => {
   const [numAndIsPrev, setNumAndIsPrev] = useState({
@@ -14,10 +16,16 @@ const Calculator = () => {
     isPrev: false,
   });
   const [formValid, setFormValid] = useState(false);
+  const setCo2Data = useSetRecoilState(co2DataAtom);
+  const co2 = useRecoilValue(co2Atom);
 
   const max = formConfigs.length;
 
   const toNext = () => {
+    setCo2Data((prev) => ({
+      ...prev,
+      [formConfigs[numAndIsPrev.number - 1].keyword]: co2,
+    }));
     setNumAndIsPrev((prev) => {
       const newNumber = prev.number === max ? max : prev.number + 1;
       return { ...prev, number: newNumber, isPrev: false };
@@ -53,8 +61,8 @@ const Calculator = () => {
                 key={config.keyword}
                 variants={slider}
                 custom={numAndIsPrev.isPrev}
-                initial="innumAndIsPrev"
-                animate="numAndIsPrev"
+                initial="initial"
+                animate="animate"
                 exit="exit"
                 className="absolute z-10 place-items-center justify-center -translate-y-[0.1rem]"
               >
@@ -112,12 +120,12 @@ const DivStacks = () => {
 };
 
 const slider = {
-  innumAndIsPrev: (isPrev: boolean) => ({
+  initial: (isPrev: boolean) => ({
     x: !isPrev ? 1500 : -1500,
     opacity: 0,
     scale: 0,
   }),
-  numAndIsPrev: {
+  animate: {
     x: 0,
     opacity: 1,
     scale: 1,

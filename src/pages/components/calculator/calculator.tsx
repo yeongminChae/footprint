@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
+import { useRecoilValue } from "recoil";
 
 import cls from "@/libs/utils";
+import { co2DataAtom } from "@/libs/atoms";
 import { iFormConfig } from "./formConfigs";
 import CalculatorFormFooter from "./calculatorForm/calculatorFormFooter";
 import CalculatorFormCheckBox from "./calculatorForm/calculatorFormCheckBox";
@@ -24,6 +26,8 @@ const CalculatorForm = ({
   isFormValid,
 }: iCalculaotrFormProps) => {
   const [type, setType] = useState(types ? types[0] : "");
+  const co2Data = useRecoilValue(co2DataAtom);
+
   const {
     register,
     handleSubmit,
@@ -36,12 +40,12 @@ const CalculatorForm = ({
 
   const usage = watch("usage");
 
-  const currentSelectedType = (curType: string) => {
-    setType(curType);
+  const currentSelectedType = (currentType: string) => {
+    setType(currentType);
   };
 
   const onSubmit = () => {
-    console.log(`${keyword} ${id} 발생량 `);
+    console.log(co2Data);
   };
 
   useEffect(() => {
@@ -88,7 +92,7 @@ const CalculatorForm = ({
 
 export default CalculatorForm;
 
-const CalculatorFormHeader = ({ title }: { title: string }) => {
+export const CalculatorFormHeader = ({ title }: { title: string }) => {
   return (
     <div
       className={cls(
@@ -102,7 +106,7 @@ const CalculatorFormHeader = ({ title }: { title: string }) => {
 };
 
 const formStyle =
-  "w-[48rem] h-[28rem] text-btnColor mt-7 bg-white rounded-lg border border-bordeColor shadow-xl";
+  "w-[48rem] h-[28rem] text-btnColor mt-7 bg-white rounded-lg border shadow-xl";
 
 const textContainerStyle =
   "h-[calc(100%-5rem)] flex flex-col justify-center items-end px-10 pt-3 ";

@@ -99,7 +99,7 @@ const container =
 
 const DivStacks = () => {
   const stackStyle =
-    "absolute rounded-lg border border-bordeColor shadow-xl h-[28rem] bg-white place-items-center";
+    "absolute rounded-lg border shadow-xl h-[28rem] bg-white place-items-center";
 
   return (
     <>

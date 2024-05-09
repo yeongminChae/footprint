@@ -18,7 +18,7 @@ export interface IFormatterOptions {
 const DonutChart = () => {
   const series = [44, 55, 38, 43, 22];
   return (
-    <div id="chart" className="col-start-1 col-span-1 pt-3">
+    <div id="chart" className="col-start-1 col-span-1 pt-5">
       <ApexChart
         type="donut"
         options={options}
@@ -80,7 +80,7 @@ const options = {
       colors: ["#fff"],
     },
   },
-  colors: ["#9fdad9", "#5edbce", "#73d5bd", "#20B2AA", "#008B8B"],
+  colors: ["#9fdad9", "#73d5bd", "#4eb9ae", "#20B2AA", "#008B8B"],
 };
 
 export default DonutChart;

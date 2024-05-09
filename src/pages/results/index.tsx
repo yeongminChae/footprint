@@ -1,4 +1,6 @@
 import { CalculatorFormHeader } from "../components/calculator/calculator";
+import BarChart from "../components/results/barChart";
+import DonutChart from "../components/results/donutChart";
 
 const results = () => {
   return (
@@ -6,9 +8,9 @@ const results = () => {
       <div className="w-[65rem] h-[40rem] bg-white rounded-lg border-2 shadow-xl">
         <CalculatorFormHeader title="결과 분석" />
         <div className="grid grid-cols-2 grid-rows-2 w-full h-[calc(100%-5rem)]">
-          <div className=""></div>
+          <DonutChart />
           <ResultsAnnounce />
-          <div className="col-span-2 "></div>
+          <BarChart />
         </div>
       </div>
     </div>
@@ -23,7 +25,7 @@ const ResultsAnnounce = () => {
   );
 
   return (
-    <div className="flex flex-col gap-10 pt-5 font-semibold">
+    <div className="col-start-2 row-start-1 flex flex-col gap-6 pt-5 font-semibold">
       <span className="font-bold text-3xl text-btnColor">결과 안내</span>
       <div>
         {textVariant("email1@gmail.com")}

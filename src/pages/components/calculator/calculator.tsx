@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import cls from "@/libs/utils";
-import { co2DataAtom } from "@/libs/atoms";
+import { co2Atom, co2DataAtom } from "@/libs/atoms";
 import { iFormConfig } from "./formConfigs";
 import CalculatorFormFooter from "./calculatorForm/calculatorFormFooter";
 import CalculatorFormCheckBox from "./calculatorForm/calculatorFormCheckBox";
@@ -25,8 +26,12 @@ const CalculatorForm = ({
   keyword,
   isFormValid,
 }: iCalculaotrFormProps) => {
+  const router = useRouter();
   const [type, setType] = useState(types ? types[0] : "");
+
+  const co2 = useRecoilValue(co2Atom);
   const co2Data = useRecoilValue(co2DataAtom);
+  const setCo2Data = useSetRecoilState(co2DataAtom);
 
   const {
     register,
@@ -44,9 +49,23 @@ const CalculatorForm = ({
     setType(currentType);
   };
 
-  const onSubmit = () => {
-    console.log(co2Data);
+  const updateCo2Data = () => {
+    setCo2Data((prev) => ({
+      ...prev,
+      ["폐기물"]: co2,
+    }));
   };
+
+  const onSubmit = () => {
+    updateCo2Data();
+    router.push("/results");
+  };
+
+  useEffect(() => {
+    const now = new Date();
+    localStorage.setItem("co2Data", JSON.stringify(co2Data));
+    localStorage.setItem("date", JSON.stringify(now));
+  }, [co2Data]);
 
   useEffect(() => {
     isFormValid(isValid);

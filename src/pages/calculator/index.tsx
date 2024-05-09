@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import cls from "@/libs/utils";
+import { co2Atom, co2DataAtom } from "@/libs/atoms";
 import Arrow, { DisabledArrow } from "../components/calculator/arrow";
 import CalculatorForm from "../components/calculator/calculator";
 import { formConfigs } from "../components/calculator/formConfigs";
 import { LeafIcon } from "../components/navBar";
-import { co2Atom, co2DataAtom } from "@/libs/atoms";
 
 const Calculator = () => {
   const [numAndIsPrev, setNumAndIsPrev] = useState({
@@ -21,11 +21,15 @@ const Calculator = () => {
 
   const max = formConfigs.length;
 
-  const toNext = () => {
+  const updateCo2Data = () => {
     setCo2Data((prev) => ({
       ...prev,
       [formConfigs[numAndIsPrev.number - 1].keyword]: co2,
     }));
+  };
+
+  const toNext = () => {
+    updateCo2Data();
     setNumAndIsPrev((prev) => {
       const newNumber = prev.number === max ? max : prev.number + 1;
       return { ...prev, number: newNumber, isPrev: false };

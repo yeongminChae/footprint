@@ -19,7 +19,7 @@ const ResultsAnnounce = ({ myDataArr }: { myDataArr: number[] }) => {
   }, []);
 
   return (
-    <div className="col-start-2 row-start-1 flex flex-col gap-6 pt-5 px-4 font-semibold">
+    <div className="col-start-2 row-start-1 flex flex-col gap-4 pt-5 px-4 font-semibold">
       <span className="font-bold text-3xl text-btnColor">결과 안내</span>
       <span>검사 일시 : {textVariant(testedDate)}</span>
       <div>

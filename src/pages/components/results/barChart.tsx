@@ -74,7 +74,17 @@ const options = {
       return val + " kg";
     },
     style: {
-      colors: ["#E9F7F3", "#008B8B"],
+      fontSize: "14px",
+      fontWeight: "bold",
+      colors: ["#d0f6eb", "#008B8B"],
+    },
+    dropShadow: {
+      enabled: true,
+      top: 0,
+      left: 0,
+      blur: 1.25,
+      color: "#008B8B",
+      opacity: 0.5,
     },
   },
   plotOptions: {

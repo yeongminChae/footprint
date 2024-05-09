@@ -64,7 +64,10 @@ const options = {
     formatter: function (val: number, opts: IFormatterOptions) {
       return opts.w.config.series[opts.seriesIndex] + " kg";
     },
+    textAnchor: "middle" as "middle" | "start" | "end",
     style: {
+      fontSize: "12px",
+      fontWeight: "bold",
       colors: ["#fff"],
     },
   },

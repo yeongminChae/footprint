@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 
 import { formConfigs } from "../calculator/formConfigs";
-import { color } from "framer-motion";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -15,14 +14,13 @@ export interface IFormatterOptions {
   };
 }
 
-const DonutChart = () => {
-  const series = [44, 55, 38, 43, 22];
+const DonutChart = ({ myDataArr }: { myDataArr: number[] }) => {
   return (
     <div id="chart" className="col-start-1 col-span-1 pt-5">
       <ApexChart
         type="donut"
         options={options}
-        series={series}
+        series={myDataArr}
         width={500}
         height={300}
       />

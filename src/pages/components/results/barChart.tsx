@@ -1,13 +1,10 @@
 import dynamic from "next/dynamic";
 
-import { formConfigs } from "../calculator/formConfigs";
+import { averageDataArr, formConfigs } from "../calculator/formConfigs";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const BarChart = () => {
-  const averageDataArr = [32.5, 38.9, 1.6, 270.8, 0.6];
-  const myDataArr = [50, 60, 30, 40, 20];
-
+const BarChart = ({ myDataArr }: { myDataArr: number[] }) => {
   const series = [
     {
       name: "나의 배출량",
@@ -77,7 +74,7 @@ const options = {
       return val + " kg";
     },
     style: {
-      colors: ["#fff", "#008B8B"],
+      colors: ["#E9F7F3", "#008B8B"],
     },
   },
   plotOptions: {

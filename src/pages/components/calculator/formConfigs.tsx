@@ -21,6 +21,8 @@ const garbageTypes = {
   L: [1, 0.095],
 };
 
+export const averageDataArr = [32.5, 38.9, 1.6, 270.8, 0.6];
+
 export const formConfigs = [
   {
     id: 0,

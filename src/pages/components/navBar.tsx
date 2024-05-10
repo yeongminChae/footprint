@@ -37,19 +37,19 @@ const LiTag = ({ title }: { title: string }) => {
     >
       {title}
       <div className="w-full h-0.5 flex">
-        <AnimatedDiv key={1} isRight={false} visible={onHover} />
-        <AnimatedDiv key={2} isRight={true} visible={onHover} />
+        <AnimatedDiv divKey={1} isRight={false} visible={onHover} />
+        <AnimatedDiv divKey={2} isRight={true} visible={onHover} />
       </div>
     </motion.li>
   );
 };
 
 const AnimatedDiv = ({
-  key,
+  divKey,
   isRight,
   visible,
 }: {
-  key: number;
+  divKey: number;
   isRight: boolean;
   visible: boolean;
 }) => {
@@ -57,7 +57,7 @@ const AnimatedDiv = ({
     <AnimatePresence>
       {visible && (
         <motion.div
-          key={key}
+          key={divKey}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           exit={{ scaleX: 0 }}

@@ -1,5 +1,7 @@
+import { JSX, SVGProps, useState } from "react";
 import Link from "next/link";
-import { JSX, SVGProps } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 const NavBar = () => {
   return (
@@ -12,18 +14,10 @@ const NavBar = () => {
           />
         </Link>
         <ul className="flex justify-between w-[30rem] items-center h-full">
-          <li className="cursor-pointer font-bold hover:underline underline-offset-4 transition ease-in-out duration-300">
-            Calculator
-          </li>
-          <li className="cursor-pointer font-bold hover:underline underline-offset-4 transition ease-in-out duration-300">
-            Recommendations
-          </li>
-          <li className="cursor-pointer font-bold hover:underline underline-offset-4 transition ease-in-out duration-300">
-            Challenges
-          </li>
-          <li className="cursor-pointer font-bold hover:underline underline-offset-4 transition ease-in-out duration-300">
-            Profile
-          </li>
+          <LiTag title="Calculator" />
+          <LiTag title="Recommendations" />
+          <LiTag title="Challenges" />
+          <LiTag title="Profile" />
         </ul>
       </nav>
     </div>
@@ -31,6 +25,50 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+const LiTag = ({ title }: { title: string }) => {
+  const [onHover, setOnHover] = useState(false);
+
+  return (
+    <motion.li
+      onHoverStart={() => setOnHover(true)}
+      onHoverEnd={() => setOnHover(false)}
+      className="cursor-pointer font-bold"
+    >
+      {title}
+      <div className="w-full h-0.5 flex">
+        <AnimatedDiv key={1} isRight={false} visible={onHover} />
+        <AnimatedDiv key={2} isRight={true} visible={onHover} />
+      </div>
+    </motion.li>
+  );
+};
+
+const AnimatedDiv = ({
+  key,
+  isRight,
+  visible,
+}: {
+  key: number;
+  isRight: boolean;
+  visible: boolean;
+}) => {
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          key={key}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          exit={{ scaleX: 0 }}
+          transition={{ duration: 0.3 }}
+          className="w-1/2  opacity-80 bg-btnColor"
+          style={{ originX: isRight ? 0 : 1 }}
+        />
+      )}
+    </AnimatePresence>
+  );
+};
 
 export const LeafIcon = (
   props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>

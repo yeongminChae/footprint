@@ -38,7 +38,7 @@ const CalculatorForm = ({
     handleSubmit,
     watch,
     reset,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm({
     mode: "onChange",
   });
@@ -88,6 +88,7 @@ const CalculatorForm = ({
           title={inputTitle}
           type={type}
           register={register}
+          errors={errors}
           units={units}
         />
 

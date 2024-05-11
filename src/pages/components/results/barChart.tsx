@@ -1,10 +1,15 @@
 import dynamic from "next/dynamic";
 
+import { useSetRecoilState } from "recoil";
+
 import { averageDataArr, formConfigs } from "../calculator/formConfigs";
+import { axisCartegory } from "@/libs/atoms";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const BarChart = ({ myDataArr }: { myDataArr: number[] }) => {
+  const setCategory = useSetRecoilState(axisCartegory);
+
   const series = [
     {
       name: "나의 배출량",
@@ -15,23 +20,38 @@ const BarChart = ({ myDataArr }: { myDataArr: number[] }) => {
       data: averageDataArr,
     },
   ];
+
+  const options = getOptions((eventType: boolean, dataPointIndex?: number) => {
+    if (eventType) {
+      setCategory({
+        key: formConfigs[dataPointIndex ? dataPointIndex : 0].inputTitle,
+        myValue: myDataArr[dataPointIndex ? dataPointIndex : 0],
+        aveValue: averageDataArr[dataPointIndex ? dataPointIndex : 0],
+      });
+    } else {
+      setCategory({ key: "", myValue: 0, aveValue: 0 });
+    }
+  });
+
   return (
     <div
       id="chart"
-      className="flex justify-center items-center col-span-2 pb-12"
+      className="flex justify-center items-center col-span-2 pb-6"
     >
       <ApexChart
         type="bar"
         options={options}
         series={series}
         width={1000}
-        height={325}
+        height={300}
       />
     </div>
   );
 };
 
-const options = {
+const getOptions = (
+  onEvent: (eventType: boolean, dataPointIndex?: number) => void
+) => ({
   chart: {
     toolbar: {
       show: false,
@@ -43,6 +63,28 @@ const options = {
       blur: 1,
       color: "#008B8B",
       opacity: 0.5,
+    },
+    events: {
+      dataPointMouseEnter: (
+        event: MouseEvent,
+        chartContext: any,
+        {
+          dataPointIndex,
+          seriesIndex,
+        }: { dataPointIndex: number; seriesIndex: number }
+      ) => {
+        onEvent(true, dataPointIndex);
+      },
+      dataPointMouseLeave: (
+        event: MouseEvent,
+        chartContext: any,
+        {
+          dataPointIndex,
+          seriesIndex,
+        }: { dataPointIndex: number; seriesIndex: number }
+      ) => {
+        onEvent(false);
+      },
     },
   },
   states: {
@@ -82,9 +124,9 @@ const options = {
       enabled: true,
       top: 0,
       left: 0,
-      blur: 1.25,
+      blur: 1.5,
       color: "#008B8B",
-      opacity: 0.5,
+      opacity: 0.45,
     },
   },
   plotOptions: {
@@ -112,6 +154,6 @@ const options = {
     },
   },
   colors: ["#008B8B", "#E9F7F3"],
-};
+});
 
 export default BarChart;

@@ -21,7 +21,7 @@ const Button = ({
 
   const btnStyling = cls(
     constBtnStyle,
-    size === "big" ? "w-[28rem] h-16" : "w-36 h-12"
+    size === "big" ? "w-[28rem] h-14" : "w-36 h-12"
   );
 
   const onBtnClick = () => {

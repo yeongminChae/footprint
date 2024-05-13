@@ -120,7 +120,9 @@ export const CalculatorFormHeader = ({ title }: { title: string }) => {
         "h-20 px-7 flex flex-col justify-center border-b"
       )}
     >
-      <span className="text-xl font-bold tracking-wide">{title}</span>
+      <span className="text-xl text-btnColor font-bold tracking-wide">
+        {title}
+      </span>
     </div>
   );
 };

@@ -4,10 +4,12 @@ import Hero1 from "../components/hero/hero1";
 import Hero2 from "../components/hero/hero2";
 import Hero3 from "../components/hero/hero3";
 import HeroContent from "../components/hero/heroContent";
+import cls from "@/libs/utils";
+import { gradiantBackground } from "..";
 
 const HeroPage: NextPage = () => {
   return (
-    <div className="w-full h-max bg-bgColor bg-centers">
+    <div className={cls("w-full h-max", gradiantBackground)}>
       <HeroContent
         id="1"
         hero={<Hero1 />}
